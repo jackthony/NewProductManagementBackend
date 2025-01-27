@@ -1,4 +1,4 @@
-name: Deploy to Elastic Beanstalk
+name: Deploy to AWS Elastic Beanstalk
 
 on:
   push:
@@ -11,15 +11,15 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
 
     - name: Set up .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '8.0'
+        dotnet-version: 8.0.x
 
     - name: Publish application
-      run: dotnet publish -c Release -o publish
+      run: dotnet publish -c Release -o ./publish
 
     - name: Compress deployment package
       run: zip -r publish.zip ./publish
